@@ -10,7 +10,7 @@
     <form action="/login" method="post">
       <h1>登入</h1>
       <div>
-        <label for="">Username:</label>
+        <label for="">Email:</label>
         <input type="text" name="email">
       </div>
       <div>
@@ -20,6 +20,7 @@
       <div>
         <input type="submit" value="Log In">
       </div>
+      <%- errorMsg %>
     </form>
   </body>
 </html>
