@@ -1,6 +1,8 @@
 const express = require('express');
 
 const router = express.Router();
+// const firebaseAdmin = require('../plugins/firebase-admin');
+// const firebase = require('../plugins/firebase');
 
 /* GET home page. */
 // route: /
