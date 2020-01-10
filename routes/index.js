@@ -7,8 +7,10 @@ const router = express.Router();
 /* GET home page. */
 // route: /
 router.get('/', (req, res) => {
+  const authUid = req.session.uid;
   res.render('index', {
     title: '測試留言板',
+    authUid,
   });
 });
 

@@ -17,7 +17,8 @@ router.post('/', (req, res) => {
   const email = req.body.email;
   const password = req.body.passwd;
   firebaseAuth.signInWithEmailAndPassword(email, password)
-    .then(() => {
+    .then((user) => {
+      req.session.uid = user.user.uid;
       res.redirect('/');
     })
     .catch((error) => {
