@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1>留言板</h1>
+    <form action="/messageBoard" method="post">
+      <input type="text" name="content" placeholder="填寫留言訊息">
+      <input type="submit" value="送出">
+    </form>
+    <a href="/login">登入</a>
+    <a href="/signup">註冊</a>
+    <a href="/user">個人頁面</a>
+    <ul>
+      <li>姓名 : 留言內容</li>
+    </ul>
+  </body>
+</html>
