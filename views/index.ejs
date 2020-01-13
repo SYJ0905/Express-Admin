@@ -29,7 +29,11 @@
       <a href="/user">個人頁面</a>
     <% } %>
     <ul>
-      <li>姓名 : 留言內容</li>
+      <% listData.forEach(function(item) { %>
+      <li>
+        <%= item.nickname %> : <%= item.content %>
+        </li>
+      <% }) %>
     </ul>
   </body>
 </html>

@@ -1,7 +1,7 @@
 const express = require('express');
 
 const router = express.Router();
-// const firebaseAdmin = require('../plugins/firebase-admin');
+const firebaseAdmin = require('../plugins/firebase-admin');
 const firebase = require('../plugins/firebase');
 
 const firebaseAuth = firebase.auth();
@@ -10,11 +10,20 @@ const firebaseAuth = firebase.auth();
 // route: /
 router.get('/', (req, res) => {
   const authUid = req.session.uid;
-  res.render('index', {
-    title: '測試留言板',
-    authUid,
-    errors: req.flash('errorMessages'),
-  });
+  firebaseAdmin.ref('list').once('value')
+    .then((dataSnapshot) => {
+      const listData = [];
+      dataSnapshot.forEach((item) => {
+        const itemInfo = item.val(); // item.val() 為一物件
+        listData.push(itemInfo);
+      });
+      res.render('index', {
+        title: '測試留言板',
+        authUid,
+        errors: req.flash('errorMessages'),
+        listData,
+      });
+    });
 });
 
 // route: /
