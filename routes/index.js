@@ -13,6 +13,7 @@ router.get('/', (req, res) => {
   res.render('index', {
     title: '測試留言板',
     authUid,
+    errors: req.flash('errorMessages'),
   });
 });
 
