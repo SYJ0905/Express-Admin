@@ -18,10 +18,12 @@ router.post('/', (req, res) => {
   const password = req.body.passwd;
   firebaseAuth.signInWithEmailAndPassword(email, password)
     .then((user) => {
+      console.log('登入成功');
       req.session.uid = user.user.uid;
       res.redirect('/');
     })
     .catch((error) => {
+      console.log('登入錯誤', error.message);
       const errorMsg = error.message;
       req.flash('errorMsg', errorMsg);
       res.redirect('/login');

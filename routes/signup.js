@@ -21,15 +21,20 @@ router.post('/', (req, res) => {
   const nickname = req.body.nickname;
   firebaseAuth.createUserWithEmailAndPassword(email, password)
     .then((user) => {
+      console.log('註冊成功');
       const userInfo = {
         uid: user.user.uid,
         email: user.user.email,
         nickname,
       };
-      firebaseAdmin.ref(`/user/${user.user.uid}`).set(userInfo);
+      return firebaseAdmin.ref(`/user/${user.user.uid}`).set(userInfo);
+    })
+    .then(() => {
+      console.log('會員資料成功寫入');
       res.redirect('/signup/success');
     })
     .catch((error) => {
+      console.log('註冊失敗', error.message);
       const errorMsg = error.message;
       req.flash('errorMsg', errorMsg);
       res.redirect('/signup');

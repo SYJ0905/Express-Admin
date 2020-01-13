@@ -21,15 +21,20 @@ router.post('/', validat, (req, res) => {
   }
   firebaseAdmin.ref(`user/${req.session.uid}`).once('value')
     .then((dataSnapshot) => {
+      console.log('取得資料庫留言');
       const listContent = {
         nickname: dataSnapshot.val().nickname,
         content: req.body.content,
       };
       const listRef = firebaseAdmin.ref('list');
-      listRef.push(listContent)
-        .then(() => {
-          res.redirect('/');
-        });
+      return listRef.push(listContent);
+    })
+    .then(() => {
+      console.log('加入留言成功');
+      res.redirect('/');
+    })
+    .catch((error) => {
+      console.log('加入留言失敗', error.message);
     });
 });
 

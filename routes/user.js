@@ -16,11 +16,16 @@ const login = (req, res, next) => {
 
 // route: /user
 router.get('/', login, (req, res) => {
-  firebaseAdmin.ref(`user/${req.session.uid}`).once('value', (dataSnapshot) => {
-    res.render('user', {
-      title: '會員專區',
-      nickname: dataSnapshot.val().nickname,
+  firebaseAdmin.ref(`user/${req.session.uid}`).once('value')
+    .then((dataSnapshot) => {
+      console.log('進入個人頁面');
+      res.render('user', {
+        title: '會員專區',
+        nickname: dataSnapshot.val().nickname,
+      });
+    })
+    .catch((error) => {
+      console.log('進入個人頁面失敗', error.message);
     });
-  });
 });
 module.exports = router;
