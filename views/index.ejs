@@ -9,17 +9,18 @@
   <body>
     <h1>留言板</h1>
     <% if (!authUid) { %>
-      <p>您尚未登入，請先登入及留言</p>
+      <p>您尚未登入，請先登入才可留言</p>
+    <% } else { %>
+      <form action="/messageBoard" method="post">
+        <input type="text" name="content" placeholder="填寫留言訊息">
+        <input type="submit" value="送出">
+      </form>
     <% } %>
-    <form action="/messageBoard" method="post">
-      <input type="text" name="content" placeholder="填寫留言訊息">
-      <input type="submit" value="送出">
-    </form>
     <% if (!authUid) { %>
       <a href="/login">登入</a>
       <a href="/signup">註冊</a>
     <% } else { %>
-      <form action="/signout" method="post">
+      <form action="/" method="post">
         <input type="submit" value="登出">
       </form>
     <% } %>
